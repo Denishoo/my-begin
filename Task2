@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+   int s, sum1=1, sum2=2, n;
+   for (int i=1;sum2<4000000;i++){
+   	n=sum2;
+	   sum2+=sum1;
+	   sum1=n;
+	   if (sum1%2==0){
+	   	s+=sum1;
+	   }
+	   
+	}
+	
+	cout<<s;
+   return 0;
+
+}
