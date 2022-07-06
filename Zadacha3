@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+bool IsPrime (int n){
+  for (int i = 2;i<n;i++){
+    if (n%i==0){
+      return false;
+    }
+  }
+  return true;
+}
+
+int main() {
+  int mn=0;
+  long int n=600851475143;
+  for (int i=2;i<n;i++){
+    if (IsPrime(i)&&n%i==0){
+      if (mn<i){
+        mn=i;
+      }
+    }
+  }
+    cout<<mn;
+  return 0;
+}
