@@ -1,0 +1,39 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main(){
+   long n=600851475143;
+    cout<<sqrt(n)<<endl;
+   //int n =11741730;
+   int lastFactor;
+   //Faktor=3;
+   
+   if (n%2==0){
+       lastFactor=2;
+       while(n%2==0){
+           n/=2;
+       }
+   }
+    else lastFactor=1;
+    
+    int maxFactor=sqrt(n);
+    int factor=3;
+    while(n>1&&factor<maxFactor){
+        if(n%factor==0){
+            n/=factor;
+            lastFactor=factor;
+            while(n%factor==0){
+                n/=factor;
+            }
+            maxFactor=sqrt(n);
+        }
+        factor+=2;
+    }
+    
+    if(n==1){
+        cout<<lastFactor;
+    }
+    else cout<<n;
+
+}
