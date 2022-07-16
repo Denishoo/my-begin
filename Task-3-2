@@ -3,7 +3,7 @@
 using namespace std;
 
 int main(){
-   long n=600851475143;
+   long long n=600851475143;
     cout<<sqrt(n)<<endl;
    //int n =11741730;
    int lastFactor;
@@ -17,7 +17,7 @@ int main(){
    }
     else lastFactor=1;
     
-    int maxFactor=sqrt(n);
+    float maxFactor=sqrt(n);
     int factor=3;
     while(n>1&&factor<maxFactor){
         if(n%factor==0){
