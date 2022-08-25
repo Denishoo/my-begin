@@ -1,0 +1,31 @@
+#include <iostream>
+#include <cmath>
+#include <vector>
+#include <string>
+using namespace std;
+
+int main(){
+    long long a, an, aa, i, ma=0, man;
+for(an=800000;an<900000;an++){
+    a=an;
+    //cout<<an<<"; ";
+    for (i=1;a!=1;i++){
+        if (a%2==0){
+            a/=2;
+            //cout<<a<<"; ";
+        }
+        else{
+            a=a*3+1;
+            //cout<<a<<"; ";
+        }
+    }
+    //cout<<i;
+    if(i>ma){
+        ma=i;
+        man=an;
+    }
+    //cout<<endl;
+    }
+    cout<<man<<"; "<<ma;
+    
+}
