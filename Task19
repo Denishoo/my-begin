@@ -1,0 +1,36 @@
+#include <iostream>
+#include <cmath>
+#include <vector>
+#include <string>
+using namespace std;
+
+bool vg(int i){
+        if(i%400==0){
+            return true;
+        }
+        else if(i%100==0){
+            return false;
+        }
+        else if(i%4==0){
+            return true;
+        }
+        return false;
+}
+
+int main(){
+    int i, m, chd, d, dn=2, sum=0;
+    for(i=1901;i<=2000;i++){
+        for(m=1;m<=12;m++){
+            if(m==4||m==6||m==9||m==11){chd=30;}
+            else if(m==2&&vg(i)){chd=29;}
+            else if(m==2&&!vg(i))){chd=28;}
+            else{chd=31;}
+            for(d=1;d<=chd;d++){
+                dn++;
+                if(dn==8){dn=1;}
+                if(dn==7&d==1){sum++;}
+            }
+        }
+    }
+    cout<<"sum="<<sum;
+}
