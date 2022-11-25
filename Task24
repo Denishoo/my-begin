@@ -1,0 +1,24 @@
+#include <iostream>
+#include <cmath>
+#include <vector>
+#include <string>
+#include <map>
+#include <utility>
+#include <set>
+using namespace std;
+int main(){
+	int s=999999, o=0;
+	string n, n2, n3="0123456789", n4;
+	for(int i=1;s!=0;i++){
+		n.push_back(s%i+'0');
+		s=s/i;
+	}
+	for(int i=n.size()-1;i>=0;i--){
+		n2.push_back(n[i]);
+	}
+	for(int i=0;i<n2.size();i++){
+		n4.push_back(n3[n2[i]-'0']);
+		n3.erase(n2[i]-'0',1);
+	}
+	cout<<n4<<n3;
+}
