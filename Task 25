@@ -1,0 +1,60 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+std::string UpheavalString(std::string line) {
+	std::string refLine;
+	for (int j = line.size() - 1; j >= 0; --j) {
+		refLine.push_back(line[j]);
+	}
+	return refLine;
+}
+
+int main() {
+	std::string left_s = "1";
+    std::string right_s = "1";
+	int n = 0;
+	int k = 0;
+	int i = 0;
+	int dec = 0;
+	int sum = 0;
+	int w = 0;
+	std::string summa = "";
+	
+	
+	while (w < 4800) {
+	
+		for (i = 0; i < right_s.size(); ++i) {
+			
+			if (i < left_s.size()) {
+				n = left_s[left_s.size() - 1 - i] - '0';
+			} 
+			else { 
+				n = 0; 
+			}
+			
+			k = right_s[right_s.size() - 1 - i] - '0';
+			
+			sum = (n + k + dec) % 10;
+			
+			summa.push_back(sum + '0');
+			
+
+			if ((n + k + dec) >= 10) {
+				dec = 1;
+			}
+			else { dec = 0; }
+	}
+	if (dec == 1) summa.push_back('1');
+	
+	summa = UpheavalString(summa);
+
+	std::cout << w + 3 << " " << summa << " " << summa.size() << std::endl;
+
+		left_s = right_s;
+		right_s = summa;
+		summa = "";
+		dec = 0;
+		++w;
+	}
+}
