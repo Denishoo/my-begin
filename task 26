@@ -1,0 +1,90 @@
+#include <cmath>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+std::string Delenie(int x, int y) {
+    std::string result = "";
+    int i = 0;
+    int r = y;
+    int ostatok = 0;
+
+    i = x / y;
+    ostatok = x % y;
+   
+    result = std::to_string(i);
+    result.push_back('.');
+    
+    for (auto j = 0; j < 120; ++j) {
+        x = ostatok * 10;
+        i = x / y;
+        ostatok = x % y;
+        result.push_back(i + '0');
+    }
+    
+    return result;
+}
+
+int Predperiod(int chislo) {
+    int i = 0;
+    int j = 0;
+    int p = 0;
+    int ch = chislo;
+    long double pp = 0;
+    std::string result = "";
+    std::string pp_s = "";
+    while (true) {
+        if (chislo % 2 > 0) {
+            break;
+        }
+        ++i;
+        chislo /= 2;
+    }
+    while (true) {
+        if (chislo % 5 > 0) {
+            break;
+        }
+        ++j;
+        chislo /= 5;
+    }
+    p = std::max(i, j);
+
+    return p;
+}
+
+
+int main()
+{
+    int x = 1;
+    int y = 0;
+    int ost = 0;
+    int res = 0;
+    int max_period = 0;
+    int max_drob = 0;
+    std::vector <int> ostatki = {};
+
+    for (auto i = 2; i <= 3000; ++i) {
+        y = i;
+        while (true) {
+            res = x / y;
+            ost = x % y;
+            if (ost == 0) break;
+            auto it = std::find(ostatki.begin(), ostatki.end(), ost);
+
+            if (it != ostatki.end()) break;
+            ostatki.push_back(ost);
+            x = ost * 10;
+        }
+
+        if (max_period < (ostatki.size() - Predperiod(y))) {
+            max_period = (ostatki.size() - Predperiod(y));
+            max_drob = y;
+        }
+
+        ostatki = {};
+        x = 1;
+
+    }
+    std::cout << "Max Period: 1/" << max_drob << " " << max_period << std::endl;
+}
