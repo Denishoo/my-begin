@@ -1,0 +1,112 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+enum class Command {
+    TABLES_INFO,
+    BOOK_N,
+    BOOK,
+    FREE_N,
+    EXIT,
+    UNKNOWN
+};
+
+Command ExtractCommand(const std::string& text_command) {
+    if (text_command == "TABLES_INFO")
+        return Command::TABLES_INFO;
+    else if (text_command == "BOOK_N")
+        return Command::BOOK_N;
+    else if (text_command == "BOOK")
+        return Command::BOOK;
+    else if (text_command == "FREE_N")
+        return Command::FREE_N;
+    else if (text_command == "EXIT")
+        return Command::EXIT;
+    else
+        return Command::UNKNOWN;
+}
+
+void TablesInfo(const std::vector<int>& tables) {
+    for (auto i = 0; i < tables.size(); ++i) {
+        std::cout << "Table " << i << (tables[i] > 0 ? " free" : " buzy") << std::endl;
+    }
+}
+
+void Book_n(std::vector<int>& tables) {
+    int n_table;
+    std::cin >> n_table;
+    if (n_table < 1 || n_table > 9) {
+        std::cout << "Wrong number table" << std::endl;
+        return;
+    }
+    if (tables[n_table] < 1) {
+        std::cout << "Table is booked." << std::endl;
+        return;
+    }
+    if (tables[n_table] > 0) {
+        tables[n_table] *= -1;
+    }
+}
+
+void Free_n(std::vector<int>& tables) {
+    int n_table;
+    std::cin >> n_table;
+    if (n_table < 1 || n_table > 9) {
+        std::cout << "Wrong number table" << std::endl;
+        return;
+    }
+    if (tables[n_table] < 0) {
+        tables[n_table] *= -1;
+        std::cout << "Table is free." << std::endl;
+    }
+}
+
+void Book(std::vector<int>& tables) {
+    int n_guests;
+    std::cin >> n_guests;
+    if (n_guests < 1 || n_guests > 8) {
+        std::cout << "Wrong number guests." << std::endl;
+        return;
+    }
+    for (auto i = 0; i < tables.size(); ++i) {
+        if (n_guests <= tables[i] && tables[i] > 0) {
+            std::cout << "Ok, table # " << i << " is booked." << std::endl;
+            tables[i] *= -1;
+            return;
+        }
+    }
+    std::cout << "There are no empty tables." << std::endl;
+}
+
+
+
+int main() {
+    std::vector<int> tables = {2, 2, 2, 2, 4, 4, 4, 6, 6, 8};
+    std::string command;
+    bool is_progress = true;
+    while (is_progress) {
+        std::cout << "Enter command: ";
+        std::cin >> command;
+        switch (ExtractCommand(command)) {
+        case Command::TABLES_INFO:
+            TablesInfo(tables);
+            break;
+        case Command::BOOK_N:
+            Book_n(tables);
+            break;
+        case Command::BOOK:
+                Book(tables);
+            break;
+        case Command::FREE_N:
+            Free_n(tables);
+            break;
+        case Command::EXIT:
+            is_progress = false;
+            break;
+        default:
+            std::cout << "Invalid command." << std::endl;
+            break;
+        }
+    }
+    return 0;
+}
