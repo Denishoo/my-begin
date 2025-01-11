@@ -1,0 +1,61 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+void SitoErat(std::vector <int>& Primes, int number) {
+	int s_res = Primes.size();
+	for (auto i = Primes[s_res - 1]; i <= number; ++i) {
+		for (int j = 0; j < s_res; ++j) {
+			if (i % Primes[j] == 0) break;
+			if (j + 1 == s_res) Primes.push_back(i);
+		}
+	}
+}
+
+bool IsPrime(const std::vector <int>& Primes, int number) {
+	if (number == 2) return true;
+	if (std::find(Primes.begin(), Primes.end(), number) == Primes.end()) {
+		return false;
+	}
+	return true;
+}
+int main() {
+	std::vector <int> Primes {2};
+	std::cout << std::endl;
+	int a = -999;
+	int b = -1000;
+	int max_a = 0;
+	int max_b = 0;
+	long long ch = 0;
+	int max_n = 0;
+	int n = 0;
+	int u;
+	for (a; a < 1000; ++a) {
+		for (b; b <= 1000; ++b) {
+			while (true) {
+				ch = n * n + a * n + b;
+				if (ch <= 1) break;
+				
+
+				SitoErat(Primes, ch);
+				if (!IsPrime(Primes, ch)) {
+					break;
+				}
+				++n;
+			}
+			if (n > max_n) {
+				max_n = n;
+				max_a = a;
+				max_b = b;
+			}
+			n = 0;
+		}
+		b = 0;
+	}
+	std::cout << "a = " << max_a << ", b = " << max_b << ", n = " << max_n << std::endl;
+	std::cout << "a * b = " << max_a * max_b << std::endl;
+	for (n; n < max_n; ++n) {
+		std::cout << n * n + max_a * n + max_b << std::endl;
+	}
+   return 0;
+}
