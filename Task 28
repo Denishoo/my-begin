@@ -1,0 +1,23 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <ctime>
+
+
+int main() {
+    unsigned int start_time = clock();
+    int k = 2;
+    int number = 1;
+    int sum_number = 1;
+    while (number < 1002001) {
+        for (int j = 0; j < 4; ++j) {
+            number += k;
+            sum_number += number;
+        }
+        k += 2;
+    }
+    std::cout << "The sum of the numbers in the diagonals: " << sum_number << std::endl;
+    unsigned int end_time = clock();
+    std::cout << "Program execution time: " << (end_time - start_time) / 1000. << std::endl;
+    return 0;
+}
